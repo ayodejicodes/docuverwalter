@@ -1,3 +1,4 @@
+using Azure.Identity;
 using docuverwalter_api.Data;
 using docuverwalter_api.Models;
 using docuverwalter_api.Repository;
@@ -10,6 +11,19 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Build configuration
+var configuration = builder.Configuration;
+
+var keyVaultUrl = configuration["KeyVaultConfig:KVUrl"];
+var credential = new DefaultAzureCredential();
+
+builder.Configuration.AddAzureKeyVault(new Uri(keyVaultUrl), credential);
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultDbConnection"));
+});
 
 // Add services to the container.
 
@@ -52,11 +66,11 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
 
 app.MapIdentityApi<ApplicationUser>();
 
