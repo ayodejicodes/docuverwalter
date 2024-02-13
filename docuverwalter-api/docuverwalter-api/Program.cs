@@ -5,7 +5,7 @@ using docuverwalter_api.Repository;
 using docuverwalter_api.Repository.IRepository;
 using docuverwalter_api.Services.BlobStorageService;
 using docuverwalter_api.Services.DocumentService;
-using doku_speicher_api.Services.BlobStorageService;
+using docuverwalter_api.Services.BlobStorageService;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
@@ -50,6 +50,7 @@ builder.Services.AddIdentityApiEndpoints<ApplicationUser>().AddEntityFrameworkSt
 builder.Services.AddScoped<IDocumentService, DocumentService>();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped<IBlobStorageService, BlobStorageService>();
+builder.Services.AddScoped<IDocumentShareLinkService, DocumentShareLinkService>();
 
 builder.Services.AddCors(options =>
 {

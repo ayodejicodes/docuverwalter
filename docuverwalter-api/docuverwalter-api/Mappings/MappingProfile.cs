@@ -2,6 +2,7 @@
 using docuverwalter_api.Models;
 using AutoMapper;
 using docuverwalter_api.Models.Dtos;
+using docuverwalter_api.Models.Dto.DocumentDto;
 
 namespace docuverwalter_api.Mappings
 {
@@ -23,7 +24,7 @@ namespace docuverwalter_api.Mappings
                 .ForMember(dest => dest.DocumentId, opt => opt.Ignore());
 
             //CreateMap<Document, DocumentDto>();
-            //CreateMap<DocumentShareLink, DocumentShareLinkDto>();
+            CreateMap<DocumentShareLink, DocumentShareLinkDto>();
         }
     }
 }

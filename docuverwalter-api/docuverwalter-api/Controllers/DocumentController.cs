@@ -10,11 +10,12 @@ using Microsoft.AspNetCore.Mvc;
 using System.IO.Compression;
 using System.Net;
 
-namespace doku_speicher_api.Controllers
+namespace docuverwalter_api.Controllers
 {
 
     [Route("api/document")]
     [ApiController]
+    [Authorize]
     public class DocumentController : ControllerBase
     {
 
@@ -114,6 +115,7 @@ namespace doku_speicher_api.Controllers
 
 
         [HttpPut("edit/{id:Guid}")]
+        [Authorize]
         public async Task<ActionResult<ApiResponse<Document>>> UpdateDocument(Guid id, [FromBody] DocumentUpdateDto updateDto)
         {
             if (!ModelState.IsValid)
@@ -149,6 +151,7 @@ namespace doku_speicher_api.Controllers
 
 
         [HttpDelete("delete/{id:Guid}")]
+        [Authorize]
         public async Task<ActionResult<ApiResponse<bool>>> DeleteDocument(Guid id)
         {
             try
@@ -182,6 +185,7 @@ namespace doku_speicher_api.Controllers
 
 
         [HttpDelete("delete/multiple")]
+        [Authorize]
         public async Task<ActionResult<ApiResponse<bool>>> DeleteMultipleDocuments([FromQuery] List<Guid>? documentIds = null)
         {
             if (documentIds == null || !documentIds.Any())

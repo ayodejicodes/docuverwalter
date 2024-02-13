@@ -6,15 +6,22 @@ namespace docuverwalter_api.Models
     public class DocumentShareLink
     {
         [Key]
-        public Guid DocumentShareLinkId { get; set; }
+        public Guid ShareLinkId { get; set; }
 
-        public string ShareLink { get; set; } = string.Empty;
-
-        public DateTime ValidUntil { get; set; }
-
+        [Required]
         public Guid DocumentId { get; set; }
-        public Document Document { get; set; }
 
-        public ApplicationUser ApplicationUser { get; set; }
+        [Required]
+        [StringLength(255)]
+        public string GeneratedLink { get; set; } = string.Empty;
+
+        [Required]
+        public DateTime ExpiryDateTime { get; set; }
+
+        [Required]
+        public bool IsActive { get; set; }
+
+        // Navigation property
+        //public Document Document { get; set; }
     }
 }

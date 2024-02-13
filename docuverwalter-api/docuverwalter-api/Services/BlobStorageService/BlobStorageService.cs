@@ -2,7 +2,7 @@
 using Azure.Storage.Blobs.Models;
 using docuverwalter_api.Services.BlobStorageService;
 
-namespace doku_speicher_api.Services.BlobStorageService
+namespace docuverwalter_api.Services.BlobStorageService
 {
     public class BlobStorageService : IBlobStorageService
     {
